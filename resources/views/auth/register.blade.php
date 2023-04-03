@@ -43,24 +43,28 @@
 <form class="form-horizontal mt-3" method="POST" action="{{ route('register') }}">
     @csrf
 
+    {{-- Name --}}
     <div class="form-group mb-3 row">
         <div class="col-12">
             <input class="form-control" id="name" type="text" name="name" required="" placeholder="Name">
         </div>
     </div>
 
+    {{-- UserName --}}
     <div class="form-group mb-3 row">
         <div class="col-12">
             <input class="form-control" id="username" type="text" name="username" required="" placeholder="UserName">
         </div>
     </div>
 
+    {{-- EmaiAddress --}}
     <div class="form-group mb-3 row">
         <div class="col-12">
             <input class="form-control" id="email" type="email" name="email" required="" placeholder="Email">
         </div>
     </div>
 
+    {{-- Form Password --}}
     <div class="form-group mb-3 row">
         <div class="col-12">
             <input class="form-control" id="password" type="password" name="password" required="" placeholder="Password">
