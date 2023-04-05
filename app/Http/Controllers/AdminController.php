@@ -55,15 +55,18 @@ class AdminController extends Controller
         if ($request->file('profile_image')) {
             $file = $request->file('profile_image');
 
-            dd($request->file('profile_image'));
-            //todo : ファイルアップロード後のファイル形式を調査。
             $filename = date('YmdHi').$file->getClientOriginalName();
-            $file->move(public_path('upload/admin_images'));
+            $file->move(public_path('upload/admin_images'),$filename);
             $data['profile_image'] = $filename;
         }
         $data->save();
 
-        return redirect()->route('admin.profile');
+        $notification = array(
+            'message' => 'Admin Profile Update Successfully',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->route('admin.profile')->with($notification);
 
     } //End Method
 }
