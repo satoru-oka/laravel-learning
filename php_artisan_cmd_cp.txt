@@ -1,0 +1,4 @@
+＊プロジェクトをZip化する前に実施する。
+php artisan config:cache
+php artisan cache:clear
+php artisan view:clear
