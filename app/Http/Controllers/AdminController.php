@@ -20,12 +20,22 @@ class AdminController extends Controller
         return redirect('/');
     } // End Method
 
+    /**
+     * Admin Profile
+     *
+     * @return admin.admin_profile_view,adminData
+     */
     public function Profile(){
         $id = Auth::user()->id;
         $adminData = User::find($id);
         return view('admin.admin_profile_view', compact('adminData'));
     } // End Method
 
+    /**
+     * Admin EditProfile
+     *
+     * @return admin.admin_profile_edit,editData
+     */
     public function EditProfile(){
 
         $id = Auth::user()->id;
@@ -45,6 +55,8 @@ class AdminController extends Controller
         if ($request->file('profile_image')) {
             $file = $request->file('profile_image');
 
+            dd($request->file('profile_image'));
+            //todo : ファイルアップロード後のファイル形式を調査。
             $filename = date('YmdHi').$file->getClientOriginalName();
             $file->move(public_path('upload/admin_images'));
             $data['profile_image'] = $filename;
