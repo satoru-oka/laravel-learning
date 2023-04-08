@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\About;
 use Image;
-
+use App\Models\MultiImage;
+use Illuminate\Support\Carbon;
 class AboutController extends Controller
 {
     public function AboutPage() {
@@ -64,6 +65,41 @@ class AboutController extends Controller
         
         $aboutpage = About::find(1);
         return view('frontend.about_page', compact('aboutpage'));
+
+    } // End Method
+
+    public function AboutMultiImage() {
+
+        return view('admin.about_page.multi_image');
+
+    } // End Method
+
+    public function StoreMultiImage(Request $request) {
+
+        $images = $request->file('multi_image');
+
+        foreach ($images as $multi_image) {
+            
+            $name_gen = hexdec(uniqid()). '.' .$multi_image->getClientOriginalExtension();
+
+            $save_url = 'upload/multi_image/'.$name_gen;
+            Image::make($multi_image)->resize(220, 220)->save('upload/multi_image/'.$name_gen);
+
+            MultiImage::insert([
+                
+                'multi_image' => $save_url,
+                'created_at' => Carbon::now()
+
+            ]);
+            
+        } // End of the foreach
+        
+        $notification = array(
+            'message' => 'Multi Image Iserted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
 
     } // End Method
 }
