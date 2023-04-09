@@ -90,7 +90,7 @@ class BlogController extends Controller
 
         } else {
 
-            Portfolio::findOrFail($portfolio_id)->update([
+            Blog::findOrFail($blog_id)->update([
 
                 'blog_category_id' => $request->blog_category_id,
                 'blog_title' => $request->blog_title,
