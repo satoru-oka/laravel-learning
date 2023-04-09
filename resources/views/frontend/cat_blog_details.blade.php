@@ -8,7 +8,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-6 col-lg-8 col-md-10">
                     <div class="breadcrumb__wrap__content">
-                        <h2 class="title"></h2>
+                        <h2 class="title"> {{ $categoryname->blog_category }} </h2>
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -49,8 +49,8 @@
                                     <div class="thumb"><img src="{{ asset($item->blog_image) }}" alt=""></div>
                                     <span class="post__by">By : <a href="#">Halina Spond</a></span>
                                 </div>
-                                <h2 class="title"><a href="blog-details.html">{{$item->blog_title}}</a></h2>
-                                <p></p>
+                                <h2 class="title"><a href="{{ route('blog.details', $item->id) }}">{{$item->blog_title}}</a></h2>
+                                <p>{!! Str::limit($item->blog_description, 200) !!}</p>
                                 <ul class="blog__post__meta">
                                     <li><i class="fal fa-calendar-alt"></i>{{ Carbon\Carbon::parse($item->created_at)->diffForHumans() }}</li>
                                 </ul>
@@ -94,7 +94,7 @@
                             <h4 class="widget-title">Categories</h4>
                             <ul class="sidebar__cat">
                                 @foreach($categories as $cat)
-                                    <li class="sidebar__cat__item"><a href="{{ route('category.post', $cat->id) }}">{{ $cat->blog_category }}</a></li>
+                                    <li class="sidebar__cat__item"><a href="{{ route('category.blog', $cat->id) }}">{{ $cat->blog_category }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
