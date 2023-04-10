@@ -37,18 +37,19 @@
 
                             <tbody>
                                 @php($i = 1)
-                                @foreach($blogs as $item)
-                            <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $item['category']['blog_category'] }}</td>
-                                <td>{{ $item->blog_title }}</td>
-                                <td>{{ $item->blog_tags }}</td>
-                                <td><img src="{{ asset($item->blog_image) }}" style="width: 60px; height: 50px;" alt=""></td>
-                                <td>
-                                    <a href="{{ route('edit.blog', $item->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
-                                    <a href="{{ route('delete.blog', $item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete"><i class="fas fa-trash-alt"></i></a>
-                                </td>
-                            </tr>
+                                @foreach($blogs as $key => $item)
+                                    <tr>
+                                        <td>{{ $key++ }}</td>
+                                        {{-- @dd($item) --}}
+                                        <td>{{ $item['category']['blog_category_id'] }}</td>
+                                        <td>{{ $item->blog_title }}</td>
+                                        <td>{{ $item->blog_tags }}</td>
+                                        <td><img src="{{ asset($item->blog_image) }}" style="width: 60px; height: 50px;" alt=""></td>
+                                        <td>
+                                            <a href="{{ route('edit.blog', $item->id) }}" class="btn btn-info sm" title="Edit Data"><i class="fas fa-edit"></i></a>
+                                            <a href="{{ route('delete.blog', $item->id) }}" class="btn btn-danger sm" title="Delete Data" id="delete"><i class="fas fa-trash-alt"></i></a>
+                                        </td>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
