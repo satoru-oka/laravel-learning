@@ -29,7 +29,8 @@ class BlogController extends Controller
     public function StoreBlog(Request $request) {
 
         $image = $request->file('blog_image');
-        $name_gen =hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
 
         Image::make($image)->resize(430, 327)->save('upload/blog/'.$name_gen);
         $save_url = 'upload/blog/'.$name_gen;
@@ -44,6 +45,7 @@ class BlogController extends Controller
             'created_at' => Carbon::now(),
 
         ]);
+        
         $notification = array(
             'message' => 'Blog Inserted Successfully',
             'alert-type' => 'success'
@@ -104,7 +106,7 @@ class BlogController extends Controller
             );
 
             return redirect()->route('all.blog')->with($notification);
-        }
+        } // End else
     } // End Method
 
     public function DeleteBlog($id) {
@@ -145,8 +147,8 @@ class BlogController extends Controller
     
     public function HomeBlog() {
         
-        $allblogs = Blog::latest()->get();
         $categories = BlogCategory::orderBy('blog_category', 'ASC')->get();
+        $allblogs = Blog::latest()->paginate(3);
         return view('frontend.blog', compact('allblogs', 'categories'));
 
     } // End Method

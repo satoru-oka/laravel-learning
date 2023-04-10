@@ -37,11 +37,10 @@
 
                             <tbody>
                                 @php($i = 1)
-                                @foreach($blogs as $key => $item)
+                                @foreach($blogs as $item)
                                     <tr>
-                                        <td>{{ $key++ }}</td>
-                                        {{-- @dd($item) --}}
-                                        <td>{{ $item['category']['blog_category_id'] }}</td>
+                                        <td>{{ $i++ }}</td>
+                                        <td>{{ $item['category']['blog_category'] }} </td>
                                         <td>{{ $item->blog_title }}</td>
                                         <td>{{ $item->blog_tags }}</td>
                                         <td><img src="{{ asset($item->blog_image) }}" style="width: 60px; height: 50px;" alt=""></td>
